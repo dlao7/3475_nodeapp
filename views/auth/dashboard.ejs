@@ -1,0 +1,10 @@
+<div class="container">
+<h1 class="mt-4">Dashboard</h1>
+<p class="lead mb-3">Welcome, <%= user.name %></p>
+<p>
+<% if (user.role === "admin") { %>
+    <a href="/admin">Admin Dashboard</a>
+<% } %>
+</p>
+<a href="/logout" class="btn btn-secondary">Logout</a>
+</div>

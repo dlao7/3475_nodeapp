@@ -1,0 +1,20 @@
+<div class="container">
+<h1 class="page-header">Dashboard</h1>
+  <p class="lead mb-3">Welcome, Admin <%= user.name %>.</p>
+
+  <p>Current Active Sessions:</p>
+
+  <ul class="list-admin">
+    <% allSessions.forEach((session) => { %>
+      <li>
+        SessionID: <%= session.sessionID %>
+      </li>
+      <li>
+        UserID: <%= session.userID %>
+      </li>
+      <li class="session">
+        <a href="/revoke/<%= session.sessionID %>">Revoke Session</a>
+      </li>
+    <% }) %>
+    </ul>
+  </div>

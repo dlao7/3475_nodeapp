@@ -1,0 +1,49 @@
+<div class="container">
+  <h1 class="page-header">Edit</h1>
+  <form enctype="multipart/form-data" action=<%= "/reminder/update/" + reminderItem.rem_id %> method="POST">
+    <% if (reminderItem.cover) { %>
+      <img src=<%= reminderItem.cover %> width="200" height="200">
+    <% } %>
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" name="title" class="form-control" id="titleInput" value="<%= reminderItem.title %>">
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea class="form-control" id="descriptionInput" rows="3" placeholder="Description" name="description"><%= reminderItem.description %></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="completed">Completed</label>
+      <div class="radio">
+        <label>
+          <% if (reminderItem.completion == 1) { %>
+            <input type="radio" name="completed" id="true" value="true" checked="checked">
+          <% } else { %>
+            <input type="radio" name="completed" id="true" value="true">
+          <% } %>
+          True
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <% if (reminderItem.completion == 0) { %>
+            <input type="radio" name="completed" id="false" value="false" checked="checked">
+          <% } else { %>
+            <input type="radio" name="completed" id="false" value="false">
+          <% } %>
+          False
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="cover">Cover Photo</label>
+      <input type="file" accept=".jpg, .jpeg, .png" class="form-control" id="cover" name="cover">
+      <input type="checkbox" id="rand_cover" name="rand_cover">Generate a Photo</input>
+      <% if (reminderItem.cover) { %>
+      <input type="checkbox" id="rem_cover" name="remove">Remove Photo</input>
+      <% } %>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+</div>
