@@ -104,13 +104,15 @@ let remindersController = {
       updatedReminder.cover = data.urls.thumb;
     } else if (req.body.remove){
       // delete the image from the folder
-      if (!thisReminder.cover.includes("unsplash")){
-        fs.rm(`./public/${thisReminder.cover}`, { force: true }, (err) => { 
-          if(err){ 
+      if (thisReminder.cover){
+        if (!thisReminder.cover.includes("unsplash")){
+          fs.rm(`./public/${thisReminder.cover}`, { force: true }, (err) => { 
+            if(err){ 
               // File deletion failed 
               console.error(err.message); 
               return; 
           }})
+        }
       }
       updatedReminder.cover = null;
     } 

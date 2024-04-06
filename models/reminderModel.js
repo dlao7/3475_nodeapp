@@ -41,15 +41,16 @@ const reminderModel = {
         return reminder.rem_id == reminderToFind;
       });
 
-      if (!searchResult.cover.includes("unsplash")){
-        fs.rm(`./public/${searchResult.cover}`, { force: true }, (err) => { 
-          if(err){ 
-              // File deletion failed 
-              console.error(err.message); 
-              return; 
-          }
-        })
-      }
+      if (searchResult.cover){
+	     if (!searchResult.cover.includes("unsplash")){
+        	fs.rm(`./public/${searchResult.cover}`, { force: true }, (err) => { 
+          	if(err){ 
+              	// File deletion failed 
+              	   console.error(err.message); 
+               return; 
+               }
+             })
+      }}
 
       const sql = 'DELETE FROM `reminders` WHERE `fk_user_id` = ? and `rem_id` = ?';
       const values = [ user_id, rem_id ];
