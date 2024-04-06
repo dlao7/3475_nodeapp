@@ -54,8 +54,13 @@ const userModel = {
     }
 
     try {
-      const hashPass = await bcrypt.hash(userEntry.password, saltRounds); 
-  
+      let hashPass;
+      if (option === "default") {
+        hashPass = await bcrypt.hash(userEntry.password, saltRounds); 
+      } else {
+        hashPass = null;
+      }
+
       const sql = 'INSERT INTO `users` (full_name, email, password, role, socialType, socialID ) VALUES (?, ?, ?, ?, ?, ?)'
       const values = [ userEntry.name, userEntry.email, hashPass, userEntry.role, userEntry.socialType, userEntry.socialID ];
 

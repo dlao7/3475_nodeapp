@@ -25,17 +25,18 @@ const githubLogin = new GitHubStrategy(
   {
     clientID: devID.clientID,
     clientSecret: devID.clientSecret,
-    callbackURL: "https://dlao.net:3001/auth/github/callback"
+    callbackURL: "https://dlao.net/auth/github/callback"
   },
   async (accessToken, refreshToken, profile, done) => { 
     const user = await userController.getUserBySocialId(profile.provider, profile.id);
 
     if (user){
       return done(null, user);
-    } else {
+    } else { 
       let userEntry = await userModel.createNewUser(profile, "social");
-      
-      return done(null, userEntry);
+      let reminder = await userModel.addDefault(userEntry[0].user_id);
+ 
+      return done(null, false);
     }
 });
 
